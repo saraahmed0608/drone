@@ -22,18 +22,18 @@ function fly(robot) {
     bot = robot;
     bot.drone.config('general:navdata_demo', 'TRUE');
 
-    bot.nav.on("navdata", function(data) {
+    bot.nav.on("navdata", function (data) {
         // console.log(data);
     });
 
-    bot.nav.on("altitudeChange", function(data) {
+    bot.nav.on("altitudeChange", function (data) {
         console.log("Altitude:", data);
-               if (altitude > 2.0) {
+        if (altitude > 2.0) {
             bot.drone.land();
         }
     });
 
-    bot.nav.on("batteryChange", function(data) {
+    bot.nav.on("batteryChange", function (data) {
         console.log("Battery level:", data);
     });
 
@@ -44,25 +44,31 @@ function fly(robot) {
 
     // Take off
     bot.drone.takeoff();
-    after(5*1000, function() {
-        bot.drone.takeoff(0);
+    after(5 * 1000, function () {
+        bot.drone.left(0.2);
     });
-
-
-    bot.drone.left(0.3);
-    after(10*1000, function() {
+    after(10 * 1000, function () {
         bot.drone.left(0);
     });
+    after (11 * 1000, function () {
+        bot.drone.forward(0.2)
+    });
 
-    bot.drone.right(0.3);
-    after(15*1000, function() {
+    after (15 * 1000, function () {
+        bot.drone.forward (0)
+    });
+
+    after (16 * 1000, function () {
+        bot.drone.right(0.3);
+    });
+    after(20 * 1000, function () {
         bot.drone.right(0);
     });
 
-    after(25*1000, function() {
+    after(21 * 1000, function () {
         bot.drone.land();
     });
-    after(37*1000, function() {
+    after(23 * 1000, function () {
         bot.drone.stop();
     });
 }
